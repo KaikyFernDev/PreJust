@@ -33,7 +33,8 @@ interface CurveTooltipProps {
 
 function CurveTooltip({ active, payload }: CurveTooltipProps) {
   if (!active || !payload?.length) return null;
-  const point = payload[0].payload;
+  const point = payload[0]?.payload;
+  if (!point) return null;
   return (
     <div className="glass-panel rounded-xl border border-border px-3 py-2 text-xs shadow-lg">
       <p className="tabular font-medium text-foreground">{brl(point.price)} por projeto</p>
@@ -83,7 +84,7 @@ export function ReverseSimulator({ profile }: ReverseSimulatorProps) {
             min={200}
             max={40000}
             step={100}
-            onValueChange={([value]) => setProjectPrice(value)}
+            onValueChange={(v) => setProjectPrice((v[0] ?? 0))}
           />
         </div>
 
@@ -98,7 +99,7 @@ export function ReverseSimulator({ profile }: ReverseSimulatorProps) {
             min={1}
             max={160}
             step={1}
-            onValueChange={([value]) => setProjectHours(value)}
+            onValueChange={(v) => setProjectHours((v[0] ?? 0))}
           />
         </div>
 

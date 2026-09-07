@@ -75,7 +75,7 @@ export function ProjectSimulator({ profile, onChange, onSave }: ProjectSimulator
             min={1}
             max={200}
             step={1}
-            onValueChange={([value]) => setHours(value)}
+            onValueChange={(v) => setHours((v[0] ?? 0))}
           />
         </div>
 
@@ -90,7 +90,7 @@ export function ProjectSimulator({ profile, onChange, onSave }: ProjectSimulator
             min={100}
             max={40000}
             step={50}
-            onValueChange={([value]) => setPrice(value)}
+            onValueChange={(v) => setPrice((v[0] ?? 0))}
           />
         </div>
 
