@@ -105,7 +105,7 @@ export function ProjectSimulator({ profile, onChange, onSave }: ProjectSimulator
             min={0}
             max={120}
             step={1}
-            onValueChange={([value]) => onChange({ marginPercent: value })}
+            onValueChange={(v) => onChange({ marginPercent: v[0] ?? 0 })}
           />
           <p className="text-xs text-muted-foreground">
             Arraste e veja o resultado recalcular na hora.

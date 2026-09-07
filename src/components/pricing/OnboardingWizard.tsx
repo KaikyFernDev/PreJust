@@ -171,7 +171,7 @@ export function OnboardingWizard({ profile, onChange, onFinish }: OnboardingWiza
                     min={20}
                     max={220}
                     step={5}
-                    onValueChange={([value]) => onChange({ productiveHours: value })}
+                    onValueChange={(v) => onChange({ productiveHours: v[0] ?? 0 })}
                   />
                   <p className="tabular font-display text-4xl font-semibold text-foreground">
                     {profile.productiveHours} h
@@ -203,7 +203,7 @@ export function OnboardingWizard({ profile, onChange, onFinish }: OnboardingWiza
                     min={0}
                     max={120}
                     step={1}
-                    onValueChange={([value]) => onChange({ marginPercent: value })}
+                    onValueChange={(v) => onChange({ marginPercent: v[0] ?? 0 })}
                   />
                 </div>
 
@@ -218,7 +218,7 @@ export function OnboardingWizard({ profile, onChange, onFinish }: OnboardingWiza
                     min={0}
                     max={40}
                     step={0.5}
-                    onValueChange={([value]) => onChange({ taxPercent: value })}
+                    onValueChange={(v) => onChange({ taxPercent: v[0] ?? 0 })}
                   />
                 </div>
 
