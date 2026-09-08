@@ -210,8 +210,10 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* Hide the "Edit with Lovable" badge on the live website */
+/* Hide the "Edit with Lovable" badge (and its close button) on the live website */
+#lovable-badge,
 .lovable-badge,
+aside[id*="lovable-badge"],
 a[href*="lovable.dev/editor"],
 a[href*="lovable.dev/projects"] {
   display: none !important;
