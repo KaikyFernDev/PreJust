@@ -47,6 +47,23 @@ export function ProjectSimulator({ profile, onChange, onSave }: ProjectSimulator
   const [name, setName] = useState("Landing page institucional");
   const [hours, setHours] = useState(20);
   const [price, setPrice] = useState(3000);
+  const [client, setClient] = useState("");
+
+  const handleExport = () => {
+    try {
+      const filename = exportQuotePdf({
+        profile,
+        result,
+        serviceName: name.trim() || "Serviço",
+        hours,
+        price,
+        clientName: client,
+      });
+      toast.success("Orçamento em PDF gerado", { description: filename });
+    } catch {
+      toast.error("Não foi possível gerar o PDF agora. Tente novamente.");
+    }
+  };
 
   const rates = useMemo(() => computeRates(profile), [profile]);
   const result = useMemo(
