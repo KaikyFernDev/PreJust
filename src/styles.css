@@ -209,3 +209,13 @@
 @utility tabular {
   font-variant-numeric: tabular-nums;
 }
+
+/* Hide the "Edit with Lovable" badge on the live website */
+.lovable-badge,
+a[href*="lovable.dev/editor"],
+a[href*="lovable.dev/projects"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
