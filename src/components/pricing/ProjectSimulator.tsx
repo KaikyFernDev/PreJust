@@ -1,6 +1,9 @@
 import { motion } from "motion/react";
-import { BookmarkPlus } from "lucide-react";
+import { BookmarkPlus, FileDown } from "lucide-react";
 import { useMemo, useState } from "react";
+import { toast } from "sonner";
+
+import { exportQuotePdf } from "@/lib/quotePdf";
 
 import { CountUpValue } from "./CountUpValue";
 import { Button } from "@/components/ui/button";
@@ -44,6 +47,23 @@ export function ProjectSimulator({ profile, onChange, onSave }: ProjectSimulator
   const [name, setName] = useState("Landing page institucional");
   const [hours, setHours] = useState(20);
   const [price, setPrice] = useState(3000);
+  const [client, setClient] = useState("");
+
+  const handleExport = () => {
+    try {
+      const filename = exportQuotePdf({
+        profile,
+        result,
+        serviceName: name.trim() || "Serviço",
+        hours,
+        price,
+        clientName: client,
+      });
+      toast.success("Orçamento em PDF gerado", { description: filename });
+    } catch {
+      toast.error("Não foi possível gerar o PDF agora. Tente novamente.");
+    }
+  };
 
   const rates = useMemo(() => computeRates(profile), [profile]);
   const result = useMemo(
@@ -112,14 +132,28 @@ export function ProjectSimulator({ profile, onChange, onSave }: ProjectSimulator
           </p>
         </div>
 
-        <Button
-          type="button"
-          variant="secondary"
-          className="w-full"
-          onClick={() => onSave({ name: name.trim() || "Serviço sem nome", hours, price })}
-        >
-          <BookmarkPlus className="size-4" /> Salvar perfil de serviço
-        </Button>
+        <div className="space-y-2">
+          <Label htmlFor="client-name">Cliente (opcional, aparece no orçamento)</Label>
+          <Input
+            id="client-name"
+            value={client}
+            onChange={(e) => setClient(e.target.value)}
+            placeholder="Ex.: Studio Aurora Ltda."
+          />
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => onSave({ name: name.trim() || "Serviço sem nome", hours, price })}
+          >
+            <BookmarkPlus className="size-4" /> Salvar perfil
+          </Button>
+          <Button type="button" onClick={handleExport}>
+            <FileDown className="size-4" /> Exportar orçamento
+          </Button>
+        </div>
       </div>
 
       <div className="space-y-4">
