@@ -132,14 +132,28 @@ export function ProjectSimulator({ profile, onChange, onSave }: ProjectSimulator
           </p>
         </div>
 
-        <Button
-          type="button"
-          variant="secondary"
-          className="w-full"
-          onClick={() => onSave({ name: name.trim() || "Serviço sem nome", hours, price })}
-        >
-          <BookmarkPlus className="size-4" /> Salvar perfil de serviço
-        </Button>
+        <div className="space-y-2">
+          <Label htmlFor="client-name">Cliente (opcional, aparece no orçamento)</Label>
+          <Input
+            id="client-name"
+            value={client}
+            onChange={(e) => setClient(e.target.value)}
+            placeholder="Ex.: Studio Aurora Ltda."
+          />
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => onSave({ name: name.trim() || "Serviço sem nome", hours, price })}
+          >
+            <BookmarkPlus className="size-4" /> Salvar perfil
+          </Button>
+          <Button type="button" onClick={handleExport}>
+            <FileDown className="size-4" /> Exportar orçamento
+          </Button>
+        </div>
       </div>
 
       <div className="space-y-4">
