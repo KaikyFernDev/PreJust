@@ -1,6 +1,9 @@
 import { motion } from "motion/react";
-import { BookmarkPlus } from "lucide-react";
+import { BookmarkPlus, FileDown } from "lucide-react";
 import { useMemo, useState } from "react";
+import { toast } from "sonner";
+
+import { exportQuotePdf } from "@/lib/quotePdf";
 
 import { CountUpValue } from "./CountUpValue";
 import { Button } from "@/components/ui/button";
